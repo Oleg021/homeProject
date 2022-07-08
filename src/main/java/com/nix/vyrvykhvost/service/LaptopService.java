@@ -5,7 +5,9 @@ import com.nix.vyrvykhvost.Main;
 import com.nix.vyrvykhvost.model.Laptop;
 import com.nix.vyrvykhvost.model.LaptopType;
 import com.nix.vyrvykhvost.model.Manufacturer;
+import com.nix.vyrvykhvost.model.Phone;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
+import com.nix.vyrvykhvost.repository.PhoneRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -17,6 +19,11 @@ public class LaptopService {
     private static final Logger LOG = LogManager.getLogger(LaptopService.class);
     private static final Random RANDOM = new Random();
     private static final LaptopRepository REPOSITORY = new LaptopRepository();
+    private final LaptopRepository repository;
+
+    public LaptopService(LaptopRepository repository) {
+        this.repository = repository;
+    }
 
     public void createAndSaveLaptops(int count) {
         List<Laptop> laptops = new LinkedList<>();
@@ -31,6 +38,17 @@ public class LaptopService {
             ));
         }
         REPOSITORY.saveAll(laptops);
+    }
+
+    public void saveLaptop(Laptop laptop) {
+        if (laptop.getCount() == 0) {
+            laptop.setCount(-1);
+        }
+        repository.save(laptop);
+    }
+
+    public List<Laptop> getAll() {
+        return repository.getAll();
     }
 
     private Manufacturer getRandomManufacturer() {

@@ -1,11 +1,9 @@
 package com.nix.vyrvykhvost.service;
 
 import com.nix.vyrvykhvost.Main;
-import com.nix.vyrvykhvost.model.Headphones;
-import com.nix.vyrvykhvost.model.HeadphonesType;
-import com.nix.vyrvykhvost.model.LaptopType;
-import com.nix.vyrvykhvost.model.Manufacturer;
+import com.nix.vyrvykhvost.model.*;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
+import com.nix.vyrvykhvost.repository.LaptopRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,6 +16,11 @@ public class HeadphoneService {
 
     private static final Random RANDOM = new Random();
     private static final HeadphonesRepository REPOSITORY = new HeadphonesRepository();
+    private final HeadphonesRepository repository;
+
+    public HeadphoneService(HeadphonesRepository repository) {
+        this.repository = repository;
+    }
 
     public void createAndSaveHeadphones(int count) {
         List<Headphones> headphones = new LinkedList<>();
@@ -32,6 +35,17 @@ public class HeadphoneService {
             ));
         }
         REPOSITORY.saveAll(headphones);
+    }
+
+    public void saveHeadphones(Headphones headphones) {
+        if (headphones.getCount() == 0) {
+            headphones.setCount(-1);
+        }
+        repository.save(headphones);
+    }
+
+    public List<Headphones> getAll() {
+        return repository.getAll();
     }
 
     private Manufacturer getRandomManufacturer() {

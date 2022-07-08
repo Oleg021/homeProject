@@ -4,6 +4,7 @@ import com.nix.vyrvykhvost.model.Headphones;
 import com.nix.vyrvykhvost.model.Laptop;
 import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 import com.nix.vyrvykhvost.service.HeadphoneService;
@@ -17,9 +18,9 @@ import java.util.List;
 
 public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
-    private static final PhoneService PHONE_SERVICE = new PhoneService();
-    private static final LaptopService LAPTOP_SERVICE = new LaptopService();
-    private static final HeadphoneService HEADPHONE_SERVICE = new HeadphoneService();
+    private static final PhoneService PHONE_SERVICE = new PhoneService(new PhoneRepository());
+    private static final LaptopService LAPTOP_SERVICE = new LaptopService(new LaptopRepository());
+    private static final HeadphoneService HEADPHONE_SERVICE = new HeadphoneService(new HeadphonesRepository());
 
     public static void main(String[] args) {
 
