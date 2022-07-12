@@ -15,6 +15,12 @@ public class PhoneService {
 
     private static final Random RANDOM = new Random();
     private static final PhoneRepository REPOSITORY = new PhoneRepository();
+    private final PhoneRepository repository;
+
+    public PhoneService(PhoneRepository repository) {
+        this.repository = repository;
+    }
+
 
     public List<Phone> createAndSavePhones(int count) {
         List<Phone> phones = new LinkedList<>();
@@ -31,10 +37,21 @@ public class PhoneService {
         return phones;
     }
 
+    public void savePhone(Phone phone) {
+        if (phone.getCount() == 0) {
+            phone.setCount(-1);
+        }
+        repository.save(phone);
+    }
+
     private Manufacturer getRandomManufacturer() {
         final Manufacturer[] values = Manufacturer.values();
         final int index = RANDOM.nextInt(values.length);
         return values[index];
+    }
+
+    public List<Phone> getAll() {
+        return repository.getAll();
     }
 
     public void printAll() {
