@@ -1,14 +1,12 @@
 package com.nix.vyrvykhvost;
 
-import com.nix.vyrvykhvost.model.Headphones;
-import com.nix.vyrvykhvost.model.Laptop;
-import com.nix.vyrvykhvost.model.Manufacturer;
-import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.model.*;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 import com.nix.vyrvykhvost.service.HeadphoneService;
 import com.nix.vyrvykhvost.service.LaptopService;
+import com.nix.vyrvykhvost.service.OptionalExamples;
 import com.nix.vyrvykhvost.service.PhoneService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -21,10 +19,11 @@ public class Main {
     private static final PhoneService PHONE_SERVICE = new PhoneService(new PhoneRepository());
     private static final LaptopService LAPTOP_SERVICE = new LaptopService(new LaptopRepository());
     private static final HeadphoneService HEADPHONE_SERVICE = new HeadphoneService(new HeadphonesRepository());
+    private static final OptionalExamples OPTIONAL_EXAMPLES = new OptionalExamples(new PhoneRepository());
 
     public static void main(String[] args) {
 
-        PHONE_SERVICE.createAndSavePhones(2);
+        /*PHONE_SERVICE.createAndSavePhones(2);
         LAPTOP_SERVICE.createAndSaveLaptops(2);
         HEADPHONE_SERVICE.createAndSaveHeadphones(2);
 
@@ -42,7 +41,27 @@ public class Main {
         LOG.info(phone2.toString());
         LOG.info(phoneRepository.delete(phone1.getId()));
         LOG.info(phone1.toString());
-        LOG.info(phone2.toString());
+        LOG.info(phone2.toString());*/
+
+
+        private static void optionalExamples() {
+            PHONE_SERVICE.createAndSavePhones(1);
+            final String id = PHONE_SERVICE.getAll().get(0).getId();
+            OPTIONAL_EXAMPLES.printIfPresent(id);
+            OPTIONAL_EXAMPLES.printOrGetDefault(id);
+            OPTIONAL_EXAMPLES.printOrCreatDefault(id);
+            OPTIONAL_EXAMPLES.mapPhoneToString(id);
+            OPTIONAL_EXAMPLES.printOrPrintDefault(id);
+            OPTIONAL_EXAMPLES.checksPhoneLessThen(id, 1000);
+            OPTIONAL_EXAMPLES.checksPhoneLessThen(id, 10);
+            OPTIONAL_EXAMPLES.checksPhoneLessThen("123", 1000);
+            try {
+                OPTIONAL_EXAMPLES.printPhoneOrElseThrowException(id);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+            OPTIONAL_EXAMPLES.printPhone(id);
+        }
 
     }
 }
