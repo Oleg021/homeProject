@@ -2,11 +2,15 @@ package com.nix.vyrvykhvost.repository;
 
 
 
+import com.nix.vyrvykhvost.Main;
 import com.nix.vyrvykhvost.model.Phone;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
-public class PhoneRepository implements CrudRepositoryPhone {
+public class PhoneRepository implements CrudeRepository<Phone> {
+    private static final Logger LOGGER = LogManager.getLogger(PhoneRepository.class);
     private final List<Phone> phones;
 
 
@@ -18,13 +22,37 @@ public class PhoneRepository implements CrudRepositoryPhone {
 
     @Override
     public void save(Phone phone) {
-        phones.add(phone);
+        if (phone == null) {
+            final IllegalArgumentException exception = new IllegalArgumentException("Cannot save a null phone");
+            LOGGER.error(exception.getMessage(), exception);
+            throw exception;
+        } else {
+            checkDuplicates(phone);
+            phones.add(phone);
+        }
+    }
+
+    private void checkDuplicates(Phone phone) {
+        for (Phone p : phones) {
+            if (phone.hashCode() == p.hashCode() && phone.equals(p)) {
+                final IllegalArgumentException exception = new IllegalArgumentException("Duplicate phone: " +
+                        phone.getId());
+                LOGGER.error(exception.getMessage(), exception);
+                throw exception;
+            }
+        }
     }
 
     @Override
     public void saveAll(List<Phone> phones) {
-        for (Phone phone : phones) {
-            save(phone);
+        if (phones == null) {
+            final IllegalArgumentException exception = new IllegalArgumentException("Cannot save a null phone");
+            LOGGER.error(exception.getMessage(), exception);
+            throw exception;
+        } else {
+            for (Phone phone : phones) {
+                save(phone);
+            }
         }
     }
 
