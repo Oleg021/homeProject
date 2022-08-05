@@ -13,46 +13,25 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class LaptopService {
+public class LaptopService extends ProductService<Laptop> {
     private static final Logger LOG = LogManager.getLogger(LaptopService.class);
-    private static final Random RANDOM = new Random();
-    private static final LaptopRepository REPOSITORY = new LaptopRepository();
     private final LaptopRepository repository;
 
     public LaptopService(LaptopRepository repository) {
+        super(repository);
         this.repository = repository;
     }
 
-    public void createAndSaveLaptops(int count) {
-        List<Laptop> laptops = new LinkedList<>();
-        if (count == 0 || count < 0) {
-            final IllegalArgumentException exception = new IllegalArgumentException("Cannot save a null phone");
-            LOG.error(exception.getMessage(), exception);
-            throw exception;
-        } else {
-            for (int i = 0; i < count; i++) {
-                laptops.add(new Laptop(
-                        "Title-" + RANDOM.nextInt(1000),
-                        RANDOM.nextInt(500),
-                        RANDOM.nextDouble(100.0),
-                        "Model-" + RANDOM.nextInt(10),
-                        getRandomManufacturer(),
-                        getRandomType()
-                ));
-            }
-        }
-        repository.saveAll(laptops);
-    }
-
-    public void saveLaptop(Laptop laptop) {
-        if (laptop.getCount() == 0) {
-            laptop.setCount(-1);
-        }
-        repository.save(laptop);
-    }
-
-    public List<Laptop> getAll() {
-        return repository.getAll();
+    @Override
+    protected Laptop creatProduct() {
+        return new Laptop(
+                "Title-" + RANDOM.nextInt(1000),
+                RANDOM.nextInt(500),
+                RANDOM.nextDouble(100.0),
+                "Model-" + RANDOM.nextInt(10),
+                getRandomManufacturer(),
+                getRandomType()
+        );
     }
 
     private Manufacturer getRandomManufacturer() {
@@ -65,12 +44,6 @@ public class LaptopService {
         final LaptopType[] values = LaptopType.values();
         final int index = RANDOM.nextInt(values.length);
         return values[index];
-    }
-
-    public void printAll() {
-       for (Laptop laptop : repository.getAll()) {
-           LOG.info(laptop);
-       }
     }
 
     public void getPriceIfPresent(String id) {

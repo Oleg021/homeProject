@@ -1,6 +1,8 @@
 package com.nix.vyrvykhvost;
 
+import com.nix.vyrvykhvost.container.ProductContainer;
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.repository.CrudeRepository;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
@@ -10,16 +12,20 @@ import com.nix.vyrvykhvost.service.PhoneService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
     private static final PhoneService PHONE_SERVICE = new PhoneService(new PhoneRepository());
     private static final LaptopService LAPTOP_SERVICE = new LaptopService(new LaptopRepository());
     private static final HeadphoneService HEADPHONE_SERVICE = new HeadphoneService(new HeadphonesRepository());
-    private static final OptionalExamples OPTIONAL_EXAMPLES = new OptionalExamples(new PhoneRepository());
+
+
 
     public static void main(String[] args) {
 
-        LAPTOP_SERVICE.createAndSaveLaptops(1);
+        /*LAPTOP_SERVICE.createAndSave(1);
         final String id = LAPTOP_SERVICE.getAll().get(0).getId();
         final LaptopType type = LAPTOP_SERVICE.getAll().get(0).getType();
         final String model = LAPTOP_SERVICE.getAll().get(0).getModel();
@@ -40,6 +46,19 @@ public class Main {
         //orElseThrow
         LAPTOP_SERVICE.printWorkerLaptopOrThrowException(id);
         //or
-        LAPTOP_SERVICE.printLaptopWithModel(id, "model");
+        LAPTOP_SERVICE.printLaptopWithModel(id, "model");*/
+
+
+        LAPTOP_SERVICE.createAndSave(3);
+        List<Laptop> laptops = new ArrayList<>();
+        laptops.add(LAPTOP_SERVICE.getAll().get(0));
+        laptops.add(LAPTOP_SERVICE.getAll().get(1));
+        laptops.add(LAPTOP_SERVICE.getAll().get(2));
+        System.out.println(laptops);
+        ProductContainer<Laptop> laptopProductContainer = new ProductContainer<>(laptops.get(1));
+        System.out.println(laptops.get(1).getPrice());
+        Laptop laptop = laptopProductContainer.calculate();
+        System.out.println(laptop.getPrice());
+
     }
 }

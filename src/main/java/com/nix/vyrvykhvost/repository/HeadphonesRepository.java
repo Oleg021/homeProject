@@ -1,10 +1,14 @@
 package com.nix.vyrvykhvost.repository;
 
 import com.nix.vyrvykhvost.model.Headphones;
+import com.nix.vyrvykhvost.model.Laptop;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
-public class HeadphonesRepository implements CrudeRepositoryHeadphones{
+public class HeadphonesRepository implements CrudeRepository<Headphones> {
+    private static final Logger LOGGER = LogManager.getLogger(HeadphonesRepository.class);
     private final List<Headphones> headphones;
 
     public HeadphonesRepository() {
@@ -13,7 +17,25 @@ public class HeadphonesRepository implements CrudeRepositoryHeadphones{
 
     @Override
     public void save(Headphones headphone) {
-        headphones.add(headphone);
+        if (headphone == null) {
+            final IllegalArgumentException exception = new IllegalArgumentException("Cannot save a null phone");
+            LOGGER.error(exception.getMessage(), exception);
+            throw exception;
+        } else {
+            checkDuplicates(headphone);
+            headphones.add(headphone);
+        }
+    }
+
+    private void checkDuplicates(Headphones headphone) {
+        for (Headphones p : headphones) {
+            if (headphone.hashCode() == p.hashCode() && headphone.equals(p)) {
+                final IllegalArgumentException exception = new IllegalArgumentException("Duplicate phone: " +
+                        headphone.getId());
+                LOGGER.error(exception.getMessage(), exception);
+                throw exception;
+            }
+        }
     }
 
     @Override
