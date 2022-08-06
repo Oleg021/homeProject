@@ -8,14 +8,16 @@ import lombok.Setter;
 public class Headphones extends Product{
     private final String model;
     private final Manufacturer manufacturer;
-    private final HeadphonesType type;
+    private final HeadphonesType headphonesType;
 
-    public Headphones(String title, int count, double price, String model, Manufacturer manufacturer, HeadphonesType type) {
-        super(title, count, price);
+    public Headphones(String title, int count, double price, String model, Manufacturer manufacturer, HeadphonesType headphonesType) {
+        super(title, count, price, ProductType.HEADPHONES);
         this.model = model;
         this.manufacturer = manufacturer;
-        this.type = type;
+        this.headphonesType = headphonesType;
     }
+
+
 
     @Override
     public String toString() {
@@ -25,7 +27,7 @@ public class Headphones extends Product{
                 ", title= " + title + '\'' +
                 ", count= " + count +
                 ", price= " + price +
-                ", type= " + type +
+                ", type= " + headphonesType +
                 ", model= " + model +
                 '}';
     }

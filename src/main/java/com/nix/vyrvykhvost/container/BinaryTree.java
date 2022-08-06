@@ -45,7 +45,7 @@ public class BinaryTree<T extends Product> {
                         case "PRICE" -> System.out.print(Math.ceil(temp.product.getPrice()));
                         case "TITLE" -> System.out.print(temp.product.getTitle());
                         case "COUNT" -> System.out.print(temp.product.getCount());
-                        case "TYPE" -> System.out.print(temp.product.getType().name());
+                        case "TYPE" -> System.out.print(temp.product.getProductType().name());
                         default -> throw new IllegalStateException("Unknown print mode: " + mode);
                     }
                     localStack.push(temp.left);

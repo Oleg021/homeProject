@@ -8,13 +8,13 @@ import lombok.Setter;
 public class Laptop extends Product {
     private final String model;
     private final Manufacturer manufacturer;
-   private final LaptopType type;
+   private final LaptopType laptopType;
 
-    public Laptop(String title, int count, double price, String model, Manufacturer manufacturer, LaptopType type) {
-        super(title, count, price);
+    public Laptop(String title, int count, double price, String model, Manufacturer manufacturer, LaptopType laptopType) {
+        super(title, count, price, ProductType.LAPTOP);
         this.model = model;
         this.manufacturer = manufacturer;
-        this.type = type;
+        this.laptopType = laptopType;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class Laptop extends Product {
                 ", title= " + title + '\'' +
                 ", count= " + count +
                 ", price= " + price +
-                ", type= " + type +
+                ", type= " + laptopType +
                 ", model= " + model +
                 '}';
     }
