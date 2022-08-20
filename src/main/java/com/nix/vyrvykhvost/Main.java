@@ -1,19 +1,17 @@
 package com.nix.vyrvykhvost;
 
-import com.nix.vyrvykhvost.container.ProductContainer;
-import com.nix.vyrvykhvost.model.*;
-import com.nix.vyrvykhvost.repository.CrudeRepository;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 import com.nix.vyrvykhvost.service.HeadphoneService;
 import com.nix.vyrvykhvost.service.LaptopService;
 import com.nix.vyrvykhvost.service.PhoneService;
+import com.nix.vyrvykhvost.util.parsers.Json;
+import com.nix.vyrvykhvost.util.parsers.Xml;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
 
 public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
@@ -49,7 +47,7 @@ public class Main {
         LAPTOP_SERVICE.printLaptopWithModel(id, "model");*/
 
 
-        LAPTOP_SERVICE.createAndSave(3);
+        /*LAPTOP_SERVICE.createAndSave(3);
         List<Laptop> laptops = new ArrayList<>();
         laptops.add(LAPTOP_SERVICE.getAll().get(0));
         laptops.add(LAPTOP_SERVICE.getAll().get(1));
@@ -58,7 +56,24 @@ public class Main {
         ProductContainer<Laptop> laptopProductContainer = new ProductContainer<>(laptops.get(1));
         System.out.println(laptops.get(1).getPrice());
         Laptop laptop = laptopProductContainer.calculate();
-        System.out.println(laptop.getPrice());
+        System.out.println(laptop.getPrice())*/;
 
+        parserTest();
     }
+
+    private static void parserTest() {
+
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        InputStream inputStreamJSON = loader.getResourceAsStream("phone.json");
+        InputStream inputStreamXML = loader.getResourceAsStream("phone.xml");
+        System.out.println("JSON: " + PHONE_SERVICE.phoneFromMap
+                (Json.linesToMap(
+                        Json.toLines(inputStreamJSON))));
+        System.out.println();
+
+        System.out.println("XML: " + PHONE_SERVICE.phoneFromMap(
+                Xml.linesToMap(
+                        Xml.toLines(inputStreamXML))));
+    }
+
 }

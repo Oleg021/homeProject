@@ -2,6 +2,7 @@ package com.nix.vyrvykhvost.service;
 
 import com.nix.vyrvykhvost.model.*;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
+import com.nix.vyrvykhvost.repository.LaptopRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,6 +12,14 @@ import java.util.Random;
 
 public class HeadphoneService extends ProductService<Headphones> {
     private final HeadphonesRepository repository;
+    private static HeadphoneService instance;
+
+    public static HeadphoneService getInstance() {
+        if (instance == null) {
+            instance = new HeadphoneService(HeadphonesRepository.getInstance());
+        }
+        return instance;
+    }
 
     public HeadphoneService(HeadphonesRepository repository) {
         super(repository);

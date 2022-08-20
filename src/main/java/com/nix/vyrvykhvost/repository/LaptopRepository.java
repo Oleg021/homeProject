@@ -1,8 +1,6 @@
 package com.nix.vyrvykhvost.repository;
 
 import com.nix.vyrvykhvost.model.Laptop;
-import com.nix.vyrvykhvost.model.LaptopType;
-import com.nix.vyrvykhvost.model.Phone;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -11,6 +9,14 @@ import java.util.*;
 public class LaptopRepository implements CrudeRepository<Laptop> {
     private static final Logger LOGGER = LogManager.getLogger(LaptopRepository.class);
     private final List<Laptop> laptops;
+    private static LaptopRepository instance;
+
+    public static LaptopRepository getInstance() {
+        if (instance == null) {
+            instance = new LaptopRepository();
+        }
+        return instance;
+    }
 
     public LaptopRepository() {
         laptops = new LinkedList<>();
@@ -87,6 +93,14 @@ public class LaptopRepository implements CrudeRepository<Laptop> {
             }
         }
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<Laptop> findAll() {
+        if (laptops.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return laptops;
     }
 
     private static class LaptopCopy {

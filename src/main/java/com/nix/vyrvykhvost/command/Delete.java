@@ -1,7 +1,7 @@
 package com.nix.vyrvykhvost.command;
 
 import com.nix.vyrvykhvost.model.*;
-import com.nix.vyrvykhvost.repository.HeadphonesRepository;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.service.HeadphoneService;
 import com.nix.vyrvykhvost.service.LaptopService;
 import com.nix.vyrvykhvost.service.PhoneService;
@@ -11,9 +11,7 @@ import com.nix.vyrvykhvost.util.Utils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Delete implements ICommand {
     private static final Logger LOG = LogManager.getLogger(Delete.class);

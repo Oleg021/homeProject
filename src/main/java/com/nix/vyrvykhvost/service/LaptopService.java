@@ -16,6 +16,15 @@ import java.util.Random;
 public class LaptopService extends ProductService<Laptop> {
     private static final Logger LOG = LogManager.getLogger(LaptopService.class);
     private final LaptopRepository repository;
+    private static LaptopService instance;
+
+    public static LaptopService getInstance() {
+        if (instance == null) {
+            instance = new LaptopService(LaptopRepository.getInstance());
+        }
+        return instance;
+    }
+
 
     public LaptopService(LaptopRepository repository) {
         super(repository);
@@ -23,7 +32,7 @@ public class LaptopService extends ProductService<Laptop> {
     }
 
     @Override
-    protected Laptop creatProduct() {
+    public Laptop creatProduct() {
         return new Laptop(
                 "Title-" + RANDOM.nextInt(1000),
                 RANDOM.nextInt(500),
@@ -91,7 +100,7 @@ public class LaptopService extends ProductService<Laptop> {
             LOG.error(exception.getMessage(), exception);
             throw exception;
         } else {
-            LOG.info(repository.findById(id).map(laptop -> laptop.getType()));
+            LOG.info(repository.findById(id).map(laptop -> laptop.getLaptopType()));
         }
     }
 
@@ -119,7 +128,7 @@ public class LaptopService extends ProductService<Laptop> {
             throw exception;
         } else {
             LOG.info(repository.findById(id)
-                    .filter(laptop -> laptop.getType().equals(LaptopType.GAMING)));
+                    .filter(laptop -> laptop.getLaptopType().equals(LaptopType.GAMING)));
         }
     }
 
@@ -130,7 +139,7 @@ public class LaptopService extends ProductService<Laptop> {
             throw exception;
         } else {
             repository.findById(id)
-                    .filter(laptop -> laptop.getType().equals(LaptopType.WORKER))
+                    .filter(laptop -> laptop.getLaptopType().equals(LaptopType.WORKER))
                     .orElseThrow(() -> new IllegalArgumentException("Laptop with type " + LaptopType.WORKER + " not found"));
         }
     }

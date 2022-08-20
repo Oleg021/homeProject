@@ -17,4 +17,6 @@ public interface CrudeRepository<T extends Product> {
     List<T> getAll();
 
     Optional<T> findById(String id);
+
+    List<T> findAll();
 }
