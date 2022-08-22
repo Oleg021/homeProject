@@ -1,14 +1,12 @@
 package com.nix.vyrvykhvost.repository;
 
 import com.nix.vyrvykhvost.model.Manufacturer;
-import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneRepositoryTest {
 

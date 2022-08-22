@@ -1,15 +1,13 @@
 package com.nix.vyrvykhvost.service;
 
 import com.nix.vyrvykhvost.model.Manufacturer;
-import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneServiceTest {
 

@@ -1,7 +1,7 @@
 package com.nix.vyrvykhvost.service;
 
 import com.nix.vyrvykhvost.model.Manufacturer;
-import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 

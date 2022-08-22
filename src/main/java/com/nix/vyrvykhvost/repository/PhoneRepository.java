@@ -2,8 +2,7 @@ package com.nix.vyrvykhvost.repository;
 
 
 
-import com.nix.vyrvykhvost.Main;
-import com.nix.vyrvykhvost.model.Phone;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -12,8 +11,14 @@ import java.util.*;
 public class PhoneRepository implements CrudeRepository<Phone> {
     private static final Logger LOGGER = LogManager.getLogger(PhoneRepository.class);
     private final List<Phone> phones;
+    private static PhoneRepository instance;
 
-
+    public static PhoneRepository getInstance() {
+        if (instance == null) {
+            instance = new PhoneRepository();
+        }
+        return instance;
+    }
 
     public PhoneRepository() {
         phones = new LinkedList<>();
@@ -97,6 +102,14 @@ public class PhoneRepository implements CrudeRepository<Phone> {
             }
         }
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<Phone> findAll() {
+        if (phones.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return phones;
     }
 
     private static class PhoneCopy {

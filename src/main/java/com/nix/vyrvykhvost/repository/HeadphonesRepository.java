@@ -10,6 +10,14 @@ import java.util.*;
 public class HeadphonesRepository implements CrudeRepository<Headphones> {
     private static final Logger LOGGER = LogManager.getLogger(HeadphonesRepository.class);
     private final List<Headphones> headphones;
+    private static HeadphonesRepository instance;
+
+    public static HeadphonesRepository getInstance() {
+        if (instance == null) {
+            instance = new HeadphonesRepository();
+        }
+        return instance;
+    }
 
     public HeadphonesRepository() {
         headphones = new LinkedList<>();
@@ -86,6 +94,14 @@ public class HeadphonesRepository implements CrudeRepository<Headphones> {
             }
         }
         return Optional.ofNullable(result);
+    }
+
+    @Override
+    public List<Headphones> findAll() {
+        if (headphones.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return headphones;
     }
 
     private static class HeadphonesCopy {

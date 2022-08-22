@@ -81,7 +81,7 @@ public abstract class ProductService<T extends Product> {
         return repository.findAll().stream()
                 .sorted(Comparator.comparing(Product::getTitle))
                 .distinct()
-                .collect(Collectors.toMap(Product::getId, Product::getType, (a1, a2) -> a2));
+                .collect(Collectors.toMap(Product::getId, Product::getProductType, (a1, a2) -> a2));
     }
 
     public DoubleSummaryStatistics getPriceStatic() {
