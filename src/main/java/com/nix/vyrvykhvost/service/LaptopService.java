@@ -1,18 +1,18 @@
 package com.nix.vyrvykhvost.service;
 
 
-import com.nix.vyrvykhvost.Main;
+import com.nix.vyrvykhvost.annotations.Autowired;
+import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.model.laptop.Laptop;
+import com.nix.vyrvykhvost.model.laptop.LaptopType;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
-import com.nix.vyrvykhvost.repository.PhoneRepository;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
+@Singleton
 public class LaptopService extends ProductService<Laptop> {
     private static final Logger LOG = LogManager.getLogger(LaptopService.class);
     private final LaptopRepository repository;
@@ -26,6 +26,7 @@ public class LaptopService extends ProductService<Laptop> {
     }
 
 
+    @Autowired
     public LaptopService(LaptopRepository repository) {
         super(repository);
         this.repository = repository;

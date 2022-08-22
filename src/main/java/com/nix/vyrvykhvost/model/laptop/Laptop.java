@@ -1,5 +1,8 @@
-package com.nix.vyrvykhvost.model;
+package com.nix.vyrvykhvost.model.laptop;
 
+import com.nix.vyrvykhvost.model.Manufacturer;
+import com.nix.vyrvykhvost.model.Product;
+import com.nix.vyrvykhvost.model.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 

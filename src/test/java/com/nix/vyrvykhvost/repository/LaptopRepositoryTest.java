@@ -1,7 +1,7 @@
 package com.nix.vyrvykhvost.repository;
 
-import com.nix.vyrvykhvost.model.Laptop;
-import com.nix.vyrvykhvost.model.LaptopType;
+import com.nix.vyrvykhvost.model.laptop.Laptop;
+import com.nix.vyrvykhvost.model.laptop.LaptopType;
 import com.nix.vyrvykhvost.model.Manufacturer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

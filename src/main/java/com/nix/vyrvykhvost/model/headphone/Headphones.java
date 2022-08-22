@@ -1,11 +1,14 @@
-package com.nix.vyrvykhvost.model;
+package com.nix.vyrvykhvost.model.headphone;
 
+import com.nix.vyrvykhvost.model.Manufacturer;
+import com.nix.vyrvykhvost.model.Product;
+import com.nix.vyrvykhvost.model.ProductType;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Headphones extends Product{
+public class Headphones extends Product {
     private final String model;
     private final Manufacturer manufacturer;
     private final HeadphonesType headphonesType;

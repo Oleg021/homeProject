@@ -1,4 +1,4 @@
-package com.nix.vyrvykhvost.model;
+package com.nix.vyrvykhvost.model.laptop;
 
 public enum LaptopType {
     GAMING, WORKER

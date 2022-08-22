@@ -1,15 +1,13 @@
 package com.nix.vyrvykhvost.service;
 
+import com.nix.vyrvykhvost.annotations.Autowired;
+import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
+import com.nix.vyrvykhvost.model.headphone.HeadphonesType;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
-import com.nix.vyrvykhvost.repository.LaptopRepository;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
+@Singleton
 public class HeadphoneService extends ProductService<Headphones> {
     private final HeadphonesRepository repository;
     private static HeadphoneService instance;
@@ -21,6 +19,7 @@ public class HeadphoneService extends ProductService<Headphones> {
         return instance;
     }
 
+    @Autowired
     public HeadphoneService(HeadphonesRepository repository) {
         super(repository);
         this.repository = repository;

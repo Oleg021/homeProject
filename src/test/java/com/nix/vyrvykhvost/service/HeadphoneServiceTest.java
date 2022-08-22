@@ -1,14 +1,14 @@
 package com.nix.vyrvykhvost.service;
 
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
+import com.nix.vyrvykhvost.model.headphone.HeadphonesType;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HeadphoneServiceTest {
 

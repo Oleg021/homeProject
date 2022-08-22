@@ -1,6 +1,8 @@
 package com.nix.vyrvykhvost.repository;
 
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
+import com.nix.vyrvykhvost.model.headphone.HeadphonesType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

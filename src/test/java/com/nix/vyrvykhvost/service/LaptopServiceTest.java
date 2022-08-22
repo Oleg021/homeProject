@@ -1,7 +1,7 @@
 package com.nix.vyrvykhvost.service;
 
-import com.nix.vyrvykhvost.model.Laptop;
-import com.nix.vyrvykhvost.model.LaptopType;
+import com.nix.vyrvykhvost.model.laptop.Laptop;
+import com.nix.vyrvykhvost.model.laptop.LaptopType;
 import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import org.junit.jupiter.api.Assertions;
@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class LaptopServiceTest {
 

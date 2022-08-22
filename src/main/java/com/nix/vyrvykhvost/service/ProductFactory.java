@@ -1,7 +1,7 @@
 package com.nix.vyrvykhvost.service;
 
-import com.nix.vyrvykhvost.model.Headphones;
-import com.nix.vyrvykhvost.model.Laptop;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
+import com.nix.vyrvykhvost.model.laptop.Laptop;
 import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.model.ProductType;
 

@@ -1,6 +1,8 @@
 package com.nix.vyrvykhvost.command;
 
 import com.nix.vyrvykhvost.model.*;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
+import com.nix.vyrvykhvost.model.laptop.Laptop;
 import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.service.HeadphoneService;
 import com.nix.vyrvykhvost.service.LaptopService;
