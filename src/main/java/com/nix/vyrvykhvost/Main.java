@@ -1,5 +1,6 @@
 package com.nix.vyrvykhvost;
 
+import com.nix.vyrvykhvost.context.ApplicationContext;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
@@ -46,7 +47,6 @@ public class Main {
         //or
         LAPTOP_SERVICE.printLaptopWithModel(id, "model");*/
 
-
         /*LAPTOP_SERVICE.createAndSave(3);
         List<Laptop> laptops = new ArrayList<>();
         laptops.add(LAPTOP_SERVICE.getAll().get(0));
@@ -56,13 +56,21 @@ public class Main {
         ProductContainer<Laptop> laptopProductContainer = new ProductContainer<>(laptops.get(1));
         System.out.println(laptops.get(1).getPrice());
         Laptop laptop = laptopProductContainer.calculate();
-        System.out.println(laptop.getPrice())*/;
+        System.out.println(laptop.getPrice());*/
 
-        parserTest();
+        //parserTest();
+        applicationContextTest();
+    }
+
+
+    private static void applicationContextTest() {
+        ApplicationContext context = ApplicationContext.getInstance();
+        context.setCache();
+        System.out.println(context.getCache());
+
     }
 
     private static void parserTest() {
-
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         InputStream inputStreamJSON = loader.getResourceAsStream("phone.json");
         InputStream inputStreamXML = loader.getResourceAsStream("phone.xml");
