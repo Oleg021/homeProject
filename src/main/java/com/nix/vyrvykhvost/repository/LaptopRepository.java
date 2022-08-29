@@ -1,11 +1,14 @@
 package com.nix.vyrvykhvost.repository;
 
+import com.nix.vyrvykhvost.annotations.Autowired;
+import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.Laptop;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.*;
 
+@Singleton
 public class LaptopRepository implements CrudeRepository<Laptop> {
     private static final Logger LOGGER = LogManager.getLogger(LaptopRepository.class);
     private final List<Laptop> laptops;
@@ -18,6 +21,7 @@ public class LaptopRepository implements CrudeRepository<Laptop> {
         return instance;
     }
 
+    @Autowired
     public LaptopRepository() {
         laptops = new LinkedList<>();
     }

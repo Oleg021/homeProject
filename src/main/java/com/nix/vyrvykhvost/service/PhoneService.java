@@ -1,5 +1,7 @@
 package com.nix.vyrvykhvost.service;
 
+import com.nix.vyrvykhvost.annotations.Autowired;
+import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.model.phone.OperationSystem;
 import com.nix.vyrvykhvost.model.phone.Phone;
@@ -10,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.function.Function;
 
+@Singleton
 public class PhoneService extends ProductService<Phone> {
     private final PhoneRepository repository;
     private static PhoneService instance;
@@ -21,6 +24,7 @@ public class PhoneService extends ProductService<Phone> {
         return instance;
     }
 
+    @Autowired
     public PhoneService(final PhoneRepository repository) {
         super(repository);
         this.repository = repository;

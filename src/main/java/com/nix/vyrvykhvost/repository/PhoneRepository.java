@@ -2,12 +2,15 @@ package com.nix.vyrvykhvost.repository;
 
 
 
+import com.nix.vyrvykhvost.annotations.Autowired;
+import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.phone.Phone;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.*;
 
+@Singleton
 public class PhoneRepository implements CrudeRepository<Phone> {
     private static final Logger LOGGER = LogManager.getLogger(PhoneRepository.class);
     private final List<Phone> phones;
@@ -20,6 +23,7 @@ public class PhoneRepository implements CrudeRepository<Phone> {
         return instance;
     }
 
+    @Autowired
     public PhoneRepository() {
         phones = new LinkedList<>();
     }

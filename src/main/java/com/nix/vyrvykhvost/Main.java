@@ -1,5 +1,6 @@
 package com.nix.vyrvykhvost;
 
+import com.nix.vyrvykhvost.context.ApplicationContext;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
@@ -59,6 +60,14 @@ public class Main {
         System.out.println(laptop.getPrice())*/;
 
         parserTest();
+        applicationContextTest();
+    }
+
+    private static void applicationContextTest() {
+        ApplicationContext context = ApplicationContext.getInstance();
+        context.setCache();
+        System.out.println(context.getCache());
+
     }
 
     private static void parserTest() {

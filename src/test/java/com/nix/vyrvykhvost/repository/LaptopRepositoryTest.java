@@ -21,13 +21,7 @@ class LaptopRepositoryTest {
     void setUp() {
         final Random random = new Random();
         target = new LaptopRepository();
-        laptop = new Laptop(
-                "Title-" + random.nextInt(1000),
-                random.nextInt(500),
-                random.nextDouble(1000.0),
-                "Model-" + random.nextInt(10),
-                Manufacturer.APPLE, LaptopType.GAMING
-        );
+        laptop = new Laptop();
     }
 
     @Test
@@ -62,7 +56,7 @@ class LaptopRepositoryTest {
 
     @Test
     void saveAll_manyLaptops() {
-        final Laptop otherLaptop = new Laptop("Title", 500, 1000.0, "Model", Manufacturer.APPLE, LaptopType.GAMING);
+        final Laptop otherLaptop = new Laptop();
         target.saveAll(List.of(laptop, otherLaptop));
         final List<Laptop> laptops = target.getAll();
         assertEquals(2, laptops.size());
@@ -107,7 +101,7 @@ class LaptopRepositoryTest {
     @Test
     void update_noLaptop() {
         target.save(laptop);
-        final Laptop noLaptop = new Laptop("Title", 500, 1000.0, "Model", Manufacturer.APPLE, LaptopType.GAMING);
+        final Laptop noLaptop = new Laptop();
         final boolean result = target.update(noLaptop);
 
         assertFalse(result);
@@ -129,7 +123,7 @@ class LaptopRepositoryTest {
     @Test
     void delete_noLaptop() {
         target.save(laptop);
-        final Laptop noLaptop = new Laptop("Title", 500, 1000.0, "Model", Manufacturer.APPLE, LaptopType.GAMING);
+        final Laptop noLaptop = new Laptop();
         final boolean result = target.delete(noLaptop.getId());
         assertFalse(result);
         final List<Laptop> actualResult = target.getAll();
