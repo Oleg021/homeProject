@@ -17,6 +17,8 @@ public class LaptopService extends ProductService<Laptop> {
     private static final Logger LOG = LogManager.getLogger(LaptopService.class);
     private final LaptopRepository repository;
     private static LaptopService instance;
+
+
     public static LaptopService getInstance() {
         if (instance == null) {
             instance = new LaptopService(LaptopRepository.getInstance());

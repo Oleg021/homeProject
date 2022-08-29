@@ -19,6 +19,8 @@ public class Laptop extends Product {
         this.manufacturer = manufacturer;
         this.laptopType = laptopType;
     }
+
+
     @Override
     public String toString() {
         return "Laptop{" +
