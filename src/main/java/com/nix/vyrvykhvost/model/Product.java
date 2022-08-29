@@ -14,6 +14,9 @@ public abstract class Product {
     protected double price;
     protected ProductType productType;
 
+    public Product() {
+        id = UUID.randomUUID().toString();
+    }
     protected Product(String title, int count, double price, ProductType productType) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
