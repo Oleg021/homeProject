@@ -6,11 +6,8 @@ import com.nix.vyrvykhvost.model.Invoice;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.repository.InvoiceRepository;
 
-import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

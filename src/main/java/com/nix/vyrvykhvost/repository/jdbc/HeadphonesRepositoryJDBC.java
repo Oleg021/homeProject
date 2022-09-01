@@ -6,7 +6,6 @@ import com.nix.vyrvykhvost.config.JDBCConfig;
 import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.model.headphone.Headphones;
 import com.nix.vyrvykhvost.model.headphone.HeadphonesType;
-import com.nix.vyrvykhvost.model.laptop.LaptopType;
 import com.nix.vyrvykhvost.repository.CrudeRepository;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.EnumUtils;
