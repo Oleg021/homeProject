@@ -8,11 +8,12 @@ import java.util.UUID;
 @Getter
 @Setter
 public abstract class Product {
-    protected final String id;
+    protected String id;
     protected String title;
     protected int count;
     protected double price;
     protected ProductType productType;
+    protected Invoice invoice;
 
     protected Product(String title, int count, double price, ProductType productType) {
         this.id = UUID.randomUUID().toString();

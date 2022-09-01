@@ -23,6 +23,7 @@ public class Phone extends Product {
         this.manufacturer = manufacturer;
     }
 
+
     public Phone(String title, int count, double price, String model, Manufacturer manufacturer, LocalDateTime creatingDate, String currency, OperationSystem operationSystem) {
         super(title, count, price, ProductType.PHONE);
         this.model = model;
