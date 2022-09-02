@@ -1,7 +1,9 @@
 package com.nix.vyrvykhvost;
 
 import com.nix.vyrvykhvost.context.ApplicationContext;
+import com.nix.vyrvykhvost.model.Invoice;
 import com.nix.vyrvykhvost.model.Product;
+import com.nix.vyrvykhvost.model.headphone.Headphones;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
@@ -64,7 +66,27 @@ public class Main {
 
         //parserTest();
         //applicationContextTest();
-        hibernateTest();
+        //hibernateTest();
+        mongoTest();
+    }
+
+    private static void mongoTest() {
+        HeadphoneService headphoneService = HeadphoneService.getInstance();
+        headphoneService.createAndSave(5);
+        Headphones headphones = headphoneService.findAll().stream().findAny().get();
+        headphones.setTitle("Test");
+        headphoneService.update(headphones);
+        System.out.println(headphoneService.findAll());
+        headphoneService.delete(headphones.getId());
+        System.out.println(headphoneService.findAll());
+        InvoiceService service = InvoiceService.getInstance();
+        List<Product> products = new ArrayList<>();
+        products.addAll(headphoneService.findAll());
+        Invoice invoice = service.createFromProducts(products);
+        System.out.println("invoice count" + service.getInvoiceCount());
+        System.out.println("findAllGreaterSumInvoices: " + service.findAllGreaterSumInvoices(100));
+        System.out.println("sortBySum: " + service.sortBySum());
+        System.out.println("find by id " + service.findById(invoice.getId()));
     }
 
     private static void hibernateTest() {
