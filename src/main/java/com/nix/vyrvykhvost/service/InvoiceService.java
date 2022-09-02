@@ -5,6 +5,7 @@ import com.nix.vyrvykhvost.annotations.Singleton;
 import com.nix.vyrvykhvost.model.Invoice;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.repository.InvoiceRepository;
+import com.nix.vyrvykhvost.repository.hibernate.InvoiceRepositoryHibernate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,6 +22,13 @@ public class InvoiceService {
         this.invoiceRepository = repository;
     }
 
+
+    public static InvoiceService getInstance() {
+        if (instance == null) {
+            instance = new InvoiceService(InvoiceRepositoryHibernate.getInstance());
+        }
+        return instance;
+    }
 
     public void createFromProducts(List<Product> invoiceProducts) {
         Invoice invoice = new Invoice();

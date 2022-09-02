@@ -1,10 +1,12 @@
 package com.nix.vyrvykhvost;
 
 import com.nix.vyrvykhvost.context.ApplicationContext;
+import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.repository.HeadphonesRepository;
 import com.nix.vyrvykhvost.repository.LaptopRepository;
 import com.nix.vyrvykhvost.repository.PhoneRepository;
 import com.nix.vyrvykhvost.service.HeadphoneService;
+import com.nix.vyrvykhvost.service.InvoiceService;
 import com.nix.vyrvykhvost.service.LaptopService;
 import com.nix.vyrvykhvost.service.PhoneService;
 import com.nix.vyrvykhvost.util.parsers.Json;
@@ -13,6 +15,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     private static final Logger LOG = LogManager.getLogger(Main.class);
@@ -59,9 +63,23 @@ public class Main {
         System.out.println(laptop.getPrice());*/
 
         //parserTest();
-        applicationContextTest();
+        //applicationContextTest();
+        hibernateTest();
     }
 
+    private static void hibernateTest() {
+        PhoneService phoneService = PhoneService.getInstance();
+        phoneService.createAndSave(5);
+        HeadphoneService headphoneService = HeadphoneService.getInstance();
+        headphoneService.createAndSave(5);
+        InvoiceService service = InvoiceService.getInstance();
+        List<Product> products = new ArrayList<>();
+        products.addAll(phoneService.findAll());
+        service.createFromProducts(products);
+        System.out.println(service.getInvoiceCount());
+        System.out.println(service.findAllGreaterSumInvoices(100));
+        System.out.println(service.sortBySum());
+    }
 
     private static void applicationContextTest() {
         ApplicationContext context = ApplicationContext.getInstance();
