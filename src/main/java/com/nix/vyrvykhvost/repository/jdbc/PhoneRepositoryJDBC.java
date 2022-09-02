@@ -35,7 +35,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
 
     @Override
     public void save(Phone phone) {
-        String sql = "INSERT INTO db.phone (id, count, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO phone (id, count, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             setObjectFields(statement, phone);
             statement.execute();
@@ -46,7 +46,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
 
     @Override
     public void saveAll(List<Phone> phones) {
-        String sql = "INSERT INTO db.phone (id, count, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO phone (id, count, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             CONNECTION.setAutoCommit(false);
@@ -66,7 +66,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
     public List<Phone> findAll() {
         final List<Phone> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.phone");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM phone");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -89,7 +89,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
 
     @Override
     public boolean update(Phone phone) {
-        String update = "UPDATE db.phone SET count = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
+        String update = "UPDATE phone SET count = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
         try (PreparedStatement statement = CONNECTION.prepareStatement(update)) {
             setObjectFields(statement, phone);
             statement.executeUpdate();
@@ -101,7 +101,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
 
     @Override
     public boolean delete(String id) {
-        String sql = "DELETE FROM db.phone WHERE id = ?";
+        String sql = "DELETE FROM phone WHERE id = ?";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             statement.setString(1, id);
             return statement.execute();
@@ -114,7 +114,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
     public List<Phone> getAll() {
         final List<Phone> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.phone");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM phone");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -139,7 +139,7 @@ public class PhoneRepositoryJDBC implements CrudeRepository<Phone> {
 
     @Override
     public Optional<Phone> findById(String id) {
-        String sql = "SELECT * FROM db.phone WHERE id = ?";
+        String sql = "SELECT * FROM phone WHERE id = ?";
         Optional<Phone> phone = Optional.empty();
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {

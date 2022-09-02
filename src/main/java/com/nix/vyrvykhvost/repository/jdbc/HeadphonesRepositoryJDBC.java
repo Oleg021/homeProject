@@ -35,7 +35,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
 
     @Override
     public void save(Headphones headphone) {
-        String sql = "INSERT INTO db.headphones (id, count, headphones_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO headphones (id, count, headphones_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             setObjectFields(statement, headphone);
             statement.execute();
@@ -46,7 +46,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
 
     @Override
     public void saveAll(List<Headphones> headphones) {
-        String sql = "INSERT INTO db.headphones (id, count, headphones_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO headphones (id, count, headphones_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             CONNECTION.setAutoCommit(false);
@@ -66,7 +66,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
     public List<Headphones> findAll() {
         final List<Headphones> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.headphones");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM headphones");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -90,7 +90,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
 
     @Override
     public boolean update(Headphones headphone) {
-        String update = "UPDATE db.headphones SET count = ?,headphones_type = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
+        String update = "UPDATE headphones SET count = ?,headphones_type = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
         try (PreparedStatement statement = CONNECTION.prepareStatement(update)) {
             setObjectFields(statement, headphone);
             statement.executeUpdate();
@@ -102,7 +102,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
 
     @Override
     public boolean delete(String id) {
-        String sql = "DELETE FROM db.headphones WHERE id = ?";
+        String sql = "DELETE FROM headphones WHERE id = ?";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             statement.setString(1, id);
             return statement.execute();
@@ -115,7 +115,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
     public List<Headphones> getAll() {
         final List<Headphones> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.headphones");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM headphones");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -141,7 +141,7 @@ public class HeadphonesRepositoryJDBC implements CrudeRepository<Headphones> {
 
     @Override
     public Optional<Headphones> findById(String id) {
-        String sql = "SELECT * FROM db.headphones WHERE id = ?";
+        String sql = "SELECT * FROM headphones WHERE id = ?";
         Optional<Headphones> headphone = Optional.empty();
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {

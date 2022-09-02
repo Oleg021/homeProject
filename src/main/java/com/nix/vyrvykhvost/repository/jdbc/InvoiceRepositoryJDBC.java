@@ -41,10 +41,10 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
 
     @Override
     public void save(Invoice invoice) {
-        String insert = "INSERT INTO db.invoice (id, sum, time) VALUES (?, ?, ?);";
-        String phone = "UPDATE db.phone SET invoice_id = ? WHERE id = ?;";
-        String headphones = "UPDATE db.headphones SET invoice_id = ? WHERE id = ?;";
-        String laptop = "UPDATE db.laptop SET invoice_id = ? WHERE id = ?;";
+        String insert = "INSERT INTO invoice (id, sum, time) VALUES (?, ?, ?);";
+        String phone = "UPDATE phone SET invoice_id = ? WHERE id = ?;";
+        String headphones = "UPDATE headphones SET invoice_id = ? WHERE id = ?;";
+        String laptop = "UPDATElaptop SET invoice_id = ? WHERE id = ?;";
         try (PreparedStatement preparedStatement = CONNECTION.prepareStatement(insert)) {
             CONNECTION.setAutoCommit(false);
 
@@ -131,7 +131,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
     @Override
     public Optional<Invoice> findById(String id) {
         String select = """
-                SELECT db.invoice.*,
+                SELECT invoice.*,
                                 
                 phone.id AS id,
                 phone.title AS title,
@@ -157,11 +157,11 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                 laptop.type AS laptop_type,
                 
                                 
-                FROM db.invoice
+                FROM invoice
                                 
-                LEFT JOIN db.phone ON phone.invoice_id = invoice.id
-                LEFT JOIN db.headphones ON headphones.invoice_id = invoice.id
-                LEFT JOIN db.laptop ON laptop.invoice_id = invoice.id
+                LEFT JOIN phone ON phone.invoice_id = invoice.id
+                LEFT JOIN headphones ON headphones.invoice_id = invoice.id
+                LEFT JOIN laptop ON laptop.invoice_id = invoice.id
                                 
                 WHERE invoice.id = ? ORDER BY invoice.id;""";
         try (PreparedStatement statement = CONNECTION.prepareStatement(select)) {
@@ -207,7 +207,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
     }
     public List<Invoice> findAllGreaterSumInvoices(double sum) {
         String select = """
-                   SELECT db.invoice.*,
+                   SELECT invoice.*,
                                 
                 phone.id AS id,
                 phone.title AS title,
@@ -232,11 +232,11 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                 laptop.manufacturer AS manufacturer,
                 laptop.type AS laptop_type,
                                 
-                FROM db.invoice
+                FROM invoice
                                 
-                LEFT JOIN db.phone ON phone.invoice_id = invoice.id
-                LEFT JOIN db.headphones ON headphones.invoice_id = invoice.id
-                LEFT JOIN db.laptop ON laptop.invoice_id = invoice.id
+                LEFT JOIN phone ON phone.invoice_id = invoice.id
+                LEFT JOIN headphones ON headphones.invoice_id = invoice.id
+                LEFT JOIN laptop ON laptop.invoice_id = invoice.id
                 WHERE sum > ? ORDER BY invoice.id;""";
         try (PreparedStatement statement = CONNECTION.prepareStatement(select)) {
             statement.setDouble(1, sum);
@@ -280,7 +280,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
     }
     public Map< Double, Integer> sortBySum() {
         Map< Double, Integer> count_sum = new HashMap<>();
-        String sortBySum = "SELECT count(id) AS count, invoice.sum FROM db.invoice GROUP BY invoice.sum;";
+        String sortBySum = "SELECT count(id) AS count, invoice.sum FROM invoice GROUP BY invoice.sum;";
 
         try (Statement statement = CONNECTION.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sortBySum);
@@ -295,7 +295,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
         return count_sum;
     }
     public int getInvoiceCount() {
-        String count = "SELECT count(id) AS count FROM db.invoice";
+        String count = "SELECT count(id) AS count FROM invoice";
 
         try (Statement statement = CONNECTION.createStatement()) {
             ResultSet resultSet = statement.executeQuery(count);
@@ -310,7 +310,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
     }
     @Override
     public void update(Invoice invoice) {
-        String update = "UPDATE db.invoice SET sum = ?, time = ? WHERE id = ?;";
+        String update = "UPDATE invoice SET sum = ?, time = ? WHERE id = ?;";
         try (PreparedStatement preparedStatement = CONNECTION.prepareStatement(update)) {
             preparedStatement.setDouble(1, invoice.getSum());
             preparedStatement.setDate(2, Date.valueOf(invoice.getTime().toLocalDate()));

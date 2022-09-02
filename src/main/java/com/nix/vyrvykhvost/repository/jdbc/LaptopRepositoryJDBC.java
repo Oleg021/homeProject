@@ -35,7 +35,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
 
     @Override
     public void save(Laptop laptop) {
-        String sql = "INSERT INTO db.laptop (id, count, laptop_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO laptop (id, count, laptop_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             setObjectFields(statement, laptop);
             statement.execute();
@@ -46,7 +46,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
 
     @Override
     public void saveAll(List<Laptop> laptops) {
-        String sql = "INSERT INTO db.laptop (id, count, laptop_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO laptop (id, count, laptop_type, manufacturer, model, price, title) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             CONNECTION.setAutoCommit(false);
@@ -66,7 +66,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
     public List<Laptop> findAll() {
         final List<Laptop> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.laptop");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM laptop");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -90,7 +90,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
 
     @Override
     public boolean update(Laptop laptop) {
-        String update = "UPDATE db.laptop SET count = ?,laptop_type = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
+        String update = "UPDATE laptop SET count = ?,laptop_type = ?, manufacturer = ?, model = ?, price = ?, title = ?  WHERE id = ?;";
         try (PreparedStatement statement = CONNECTION.prepareStatement(update)) {
             setObjectFields(statement, laptop);
             statement.executeUpdate();
@@ -102,7 +102,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
 
     @Override
     public boolean delete(String id) {
-        String sql = "DELETE FROM db.laptop WHERE id = ?";
+        String sql = "DELETE FROM laptop WHERE id = ?";
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
             statement.setString(1, id);
             return statement.execute();
@@ -115,7 +115,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
     public List<Laptop> getAll() {
         final List<Laptop> result = new ArrayList<>();
         try (final Statement statement = CONNECTION.createStatement()) {
-            final ResultSet resultSet = statement.executeQuery("SELECT * FROM db.laptop");
+            final ResultSet resultSet = statement.executeQuery("SELECT * FROM laptop");
             while (resultSet.next()) {
                 result.add(setFieldsToObject(resultSet));
             }
@@ -141,7 +141,7 @@ public class LaptopRepositoryJDBC implements CrudeRepository<Laptop> {
 
     @Override
     public Optional<Laptop> findById(String id) {
-        String sql = "SELECT * FROM db.laptop WHERE id = ?";
+        String sql = "SELECT * FROM laptop WHERE id = ?";
         Optional<Laptop> laptop = Optional.empty();
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(sql)) {
