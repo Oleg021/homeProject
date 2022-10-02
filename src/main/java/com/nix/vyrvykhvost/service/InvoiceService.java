@@ -6,11 +6,13 @@ import com.nix.vyrvykhvost.model.Invoice;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.repository.InvoiceRepository;
 import com.nix.vyrvykhvost.repository.hibernate.InvoiceRepositoryHibernate;
+import com.nix.vyrvykhvost.repository.mongodb.InvoiceRepositoryMongo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Singleton
 public class InvoiceService {
@@ -25,19 +27,19 @@ public class InvoiceService {
 
     public static InvoiceService getInstance() {
         if (instance == null) {
-            instance = new InvoiceService(InvoiceRepositoryHibernate.getInstance());
+            instance = new InvoiceService(InvoiceRepositoryMongo.getInstance());
         }
         return instance;
     }
 
-    public void createFromProducts(List<Product> invoiceProducts) {
+    public Invoice createFromProducts(List<Product> invoiceProducts) {
         Invoice invoice = new Invoice();
 
         invoice.setTime(LocalDateTime.now());
         invoice.setSum(invoiceProducts.stream().mapToDouble(Product::getPrice).sum());
         invoice.setProducts(new ArrayList<>(invoiceProducts));
-
         invoiceRepository.save(invoice);
+        return invoice;
     }
 
     public void updateDate(LocalDateTime newDate, String id) {
@@ -56,6 +58,10 @@ public class InvoiceService {
     }
     public Map<Double, Integer > sortBySum() {
         return invoiceRepository.sortBySum();
+    }
+
+    public Optional<Invoice> findById(String id) {
+        return invoiceRepository.findById(id);
     }
 
 }

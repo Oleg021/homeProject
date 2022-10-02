@@ -9,7 +9,6 @@ import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.model.ProductType;
 import com.nix.vyrvykhvost.model.headphone.Headphones;
 import com.nix.vyrvykhvost.model.headphone.HeadphonesType;
-import com.nix.vyrvykhvost.model.laptop.Laptop;
 import com.nix.vyrvykhvost.model.laptop.LaptopType;
 import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.repository.InvoiceRepository;
@@ -60,7 +59,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                 if (product instanceof Headphones) {
                     updateProduct(headphones, invoice, product);
                 }
-                if (product instanceof Laptop) {
+                if (product instanceof com.nix.vyrvykhvost.model.laptop.Laptop) {
                     updateProduct(laptop, invoice, product);
                 }
             });
@@ -120,7 +119,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                 String model = resultSet.getString("model");
                 Manufacturer manufacturer = EnumUtils.getEnum(Manufacturer.class, resultSet.getString("manufacturer"), Manufacturer.NONE);
                 LaptopType laptopType = EnumUtils.getEnum(LaptopType.class, resultSet.getString("laptop_type"), LaptopType.NONE);
-                Laptop laptop = new Laptop(title, count, price, model, manufacturer, laptopType);
+                com.nix.vyrvykhvost.model.laptop.Laptop laptop = new com.nix.vyrvykhvost.model.laptop.Laptop(title, count, price, model, manufacturer, laptopType);
                 laptop.setId(resultSet.getString("id"));
                 yield laptop;
             }
@@ -193,7 +192,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                     }
                 }
                 if (resultSet.getString("id") != null) {
-                    Laptop laptop = (Laptop) setFieldsToObject(resultSet, ProductType.LAPTOP);
+                    com.nix.vyrvykhvost.model.laptop.Laptop laptop = (com.nix.vyrvykhvost.model.laptop.Laptop) setFieldsToObject(resultSet, ProductType.LAPTOP);
                     if (!products.contains(laptop)) {
                         products.add(laptop);
                     }
@@ -266,7 +265,7 @@ public class InvoiceRepositoryJDBC implements InvoiceRepository {
                     }
                 }
                 if (resultSet.getString("id") != null) {
-                    Laptop laptop = (Laptop) setFieldsToObject(resultSet, ProductType.LAPTOP);
+                    com.nix.vyrvykhvost.model.laptop.Laptop laptop = (com.nix.vyrvykhvost.model.laptop.Laptop) setFieldsToObject(resultSet, ProductType.LAPTOP);
                     if (!products.contains(laptop)) {
                         products.add(laptop);
                     }

@@ -2,7 +2,7 @@ package com.nix.vyrvykhvost.command;
 
 import com.nix.vyrvykhvost.model.*;
 import com.nix.vyrvykhvost.model.headphone.Headphones;
-import com.nix.vyrvykhvost.model.phone.Laptop;
+import com.nix.vyrvykhvost.model.phone.Phone;
 import com.nix.vyrvykhvost.service.HeadphoneService;
 import com.nix.vyrvykhvost.service.LaptopService;
 import com.nix.vyrvykhvost.service.PhoneService;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Delete implements ICommand {
     private static final Logger LOG = LogManager.getLogger(Delete.class);
-    private static final ProductService<Laptop> PHONE_SERVICE = PhoneService.getInstance();
+    private static final ProductService<Phone> PHONE_SERVICE = PhoneService.getInstance();
     private static final ProductService<com.nix.vyrvykhvost.model.laptop.Laptop> LAPTOP_SERVICE = LaptopService.getInstance();
     private static final ProductService<Headphones> HEADPHONES_SERVICE = HeadphoneService.getInstance();
 

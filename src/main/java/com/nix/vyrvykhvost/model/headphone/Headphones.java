@@ -4,14 +4,24 @@ import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.model.ProductType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 public class Headphones extends Product {
-    private final String model;
-    private final Manufacturer manufacturer;
-    private final HeadphonesType headphonesType;
+    @Column
+    private String model;
+    @Column
+    private Manufacturer manufacturer;
+    @Transient
+    private HeadphonesType headphonesType;
 
     public Headphones(String title, int count, double price, String model, Manufacturer manufacturer, HeadphonesType headphonesType) {
         super(title, count, price, ProductType.HEADPHONES);

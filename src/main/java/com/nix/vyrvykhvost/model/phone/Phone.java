@@ -4,17 +4,28 @@ import com.nix.vyrvykhvost.model.Manufacturer;
 import com.nix.vyrvykhvost.model.Product;
 import com.nix.vyrvykhvost.model.ProductType;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Entity
+@NoArgsConstructor
 public class Phone extends Product {
-    private final String model;
-    private final Manufacturer manufacturer;
+    @Column
+    private  String model;
+    @Column
+    private  Manufacturer manufacturer;
+    @Transient
     private LocalDateTime creatingDate;
+    @Transient
     private String currency;
+    @Transient
     private OperationSystem operationSystem;
 
     public Phone(String title, int count, double price, String model, Manufacturer manufacturer) {
